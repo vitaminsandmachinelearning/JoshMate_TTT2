@@ -51,7 +51,19 @@ SWEP.WorldModel            = Model("models/weapons/w_pistol.mdl")
 
 local Taser_Stun_Duration      = 10
 
-local weaponArray = {"weapon_jm_secondary_auto","weapon_jm_secondary_light","weapon_jm_secondary_heavy","weapon_jm_primary_rifle","weapon_jm_primary_smg","weapon_jm_primary_shotgun","weapon_jm_primary_sniper","weapon_jm_primary_lmg","weapon_jm_grenade_smoke","weapon_jm_grenade_fire","weapon_jm_grenade_push"}
+local weaponArray = {
+   "weapon_jm_secondary_auto",
+   "weapon_jm_secondary_light",
+   "weapon_jm_secondary_heavy",
+   "weapon_jm_primary_rifle",
+   "weapon_jm_primary_smg",
+   "weapon_jm_primary_shotgun",
+   "weapon_jm_primary_sniper",
+   "weapon_jm_primary_lmg",
+   "weapon_jm_grenade_smoke",
+   "weapon_jm_grenade_fire",
+   "weapon_jm_grenade_push"
+}
 
 function TaseEffects(ent, timerName)
    if not IsValid(ent) then
