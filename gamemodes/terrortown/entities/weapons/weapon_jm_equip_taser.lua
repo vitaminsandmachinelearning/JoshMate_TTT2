@@ -51,7 +51,7 @@ SWEP.WorldModel            = Model("models/weapons/w_pistol.mdl")
 
 local Taser_Stun_Duration      = 10
 
-
+local weaponArray = {"weapon_jm_secondary_auto","weapon_jm_secondary_light","weapon_jm_secondary_heavy","weapon_jm_primary_rifle","weapon_jm_primary_smg","weapon_jm_primary_shotgun","weapon_jm_primary_sniper","weapon_jm_primary_lmg","weapon_jm_grenade_smoke","weapon_jm_grenade_fire","weapon_jm_grenade_push"}
 
 function TaseEffects(ent, timerName)
    if not IsValid(ent) then
@@ -119,23 +119,15 @@ function TaseTarget(att, path, dmginfo)
       net.Send(att)
       -- End Of
       
-      ent:SetZoom(false)
-      ent:SetIronsights(false)
+      ent:GetActiveWeapon():PreDrop()
 
       ent:Freeze(true)
       ent:SetNWBool("isTased", true)
 
-      ent:StripWeapon("weapon_jm_secondary_auto")
-      ent:StripWeapon("weapon_jm_secondary_light")
-      ent:StripWeapon("weapon_jm_secondary_heavy")
-      ent:StripWeapon("weapon_jm_primary_rifle")
-      ent:StripWeapon("weapon_jm_primary_smg")
-      ent:StripWeapon("weapon_jm_primary_shotgun")
-      ent:StripWeapon("weapon_jm_primary_sniper")
-      ent:StripWeapon("weapon_jm_primary_lmg")
-      ent:StripWeapon("weapon_jm_grenade_smoke")
-      ent:StripWeapon("weapon_jm_grenade_fire")
-      ent:StripWeapon("weapon_jm_grenade_push")
+      for names = 1, table.getn(weaponArray) do
+         ent:GetActiveWeapon():PreDrop()
+         ent:StripWeapon(weaponArray[names])
+      end
 
       ent:SelectWeapon("weapon_zm_improvised")
 
