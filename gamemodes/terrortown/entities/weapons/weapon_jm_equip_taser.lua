@@ -126,7 +126,7 @@ function TaseTarget(att, path, dmginfo)
 
       ent:GetActiveWeapon():PreDrop()
 
-      for names = 1, table.getn(weaponArray) do
+      for names = 1, #weaponArray do
          ent:StripWeapon(weaponArray[names])
       end
 
