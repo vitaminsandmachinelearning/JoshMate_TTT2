@@ -119,6 +119,7 @@ function TaseTarget(att, path, dmginfo)
       net.Send(att)
       -- End Of
       
+      ent:StopZooming()
       ent:Freeze(true)
       ent:SetNWBool("isTased", true)
 
