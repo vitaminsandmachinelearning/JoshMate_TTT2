@@ -47,6 +47,7 @@ if CLIENT then
 		- Takes 3 seconds to activate
 		- Any action will cancel it
 		- You can still look around
+		- Temmo Passive
 	]]
 }
 end
@@ -60,6 +61,15 @@ end
 function SWEP:SecondaryAttack()
 end
 
+function DisableChameleon(player) 
+	player:SetNWFloat("lastTimePlayerDidInput", CurTime())
+	player:SetNWBool("isChameleoned", false)
+	STATUS:RemoveStatus(player,"jm_chameleon")
+	if SERVER then
+		ULib.invisible(player,false,255)
+	end
+end
+
 function SWEP:Think()
 	if SERVER then
 		local player = self:GetOwner()
@@ -69,13 +79,7 @@ function SWEP:Think()
 		if not player:Alive() then return end
 
 		if not player:GetVelocity():IsZero() then
-			player:SetNWFloat("lastTimePlayerDidInput", CurTime())
-			player:SetNWBool("isChameleoned", false)
-			player:SetNWFloat("lastTimePlayerDidInput", CurTime())
-			STATUS:RemoveStatus(player,"jm_chameleon")
-			if SERVER then
-				ULib.invisible(player,false,255)
-			end
+			DisableChameleon(player)
 		end
 
 		if player:GetNWFloat("lastTimePlayerDidInput") <= (CurTime() - Chameleon_Delay) then
@@ -131,10 +135,9 @@ function SWEP:OnDrop()
 
 -- Chameleon
 hook.Add( "PlayerButtonDown", "JM_Chameleon_Activation", function( ply, key )
-    ply:SetNWBool("isChameleoned", false)
-	ply:SetNWFloat("lastTimePlayerDidInput", CurTime())
-	STATUS:RemoveStatus(ply,"jm_chameleon")
-	if SERVER then
-		ULib.invisible(ply,false,255)
-	end
-end )
+    DisableChameleon(ply)
+end)
+
+hook.Add( "PlayerSwitchWeapon", "JM_Chameleon_SwapWeapons", function( ply, oldWeapon, newWeapon)
+    DisableChameleon(ply)
+end
