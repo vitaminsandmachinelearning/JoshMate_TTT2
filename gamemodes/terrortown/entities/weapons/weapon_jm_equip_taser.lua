@@ -136,8 +136,6 @@ function TaseTarget(att, path, dmginfo)
       ent:Freeze(true)
       ent:SetNWBool("isTased", true)
 
-      ent:GetActiveWeapon():PreDrop()
-
       for names = 1, #weaponArray do
          ent:StripWeapon(weaponArray[names])
       end
