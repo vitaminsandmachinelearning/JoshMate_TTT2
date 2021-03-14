@@ -120,8 +120,8 @@ function TaseTarget(att, path, dmginfo)
       -- End Of
       
       ent:SetZoom(false)
-      ent:SetIronSights(false)
-      
+      ent:SetIronsights(false)
+
       ent:Freeze(true)
       ent:SetNWBool("isTased", true)
 
